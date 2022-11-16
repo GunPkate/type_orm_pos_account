@@ -1,16 +1,15 @@
-import { AccountControl } from "./AccountControl";
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  BaseEntity,
-  OneToMany,
-} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Purchase } from "./Purchase";
 
 @Entity({ name: "Supplier" })
 export class Supplier {
   @PrimaryGeneratedColumn()
   SupplierID!: number;
+
+  @OneToMany(() => Purchase, (purchase: Purchase) => purchase.SupplierID, {
+    cascade: true,
+  })
+  purchase!: Array<Purchase>;
 
   @Column({ type: "varchar", length: 150 })
   SupplierName!: string;
@@ -23,5 +22,4 @@ export class Supplier {
 
   @Column({ type: "varchar", length: 300 })
   Address!: string;
-
 }

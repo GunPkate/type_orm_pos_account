@@ -1,3 +1,4 @@
+import { Supplier } from "./Supplier";
 import { AccountControl } from "./AccountControl";
 import {
   Entity,
@@ -6,6 +7,8 @@ import {
   BaseEntity,
   OneToMany,
   CreateDateColumn,
+  ManyToOne,
+  JoinColumn,
 } from "typeorm";
 
 @Entity({ name: "Purchase" })
@@ -13,8 +16,11 @@ export class Purchase {
   @PrimaryGeneratedColumn()
   PurchaseID!: number;
 
-  @Column({ type: "int" })
-  SupplierID!: number;
+  @ManyToOne(() => Supplier, (supplier: Supplier) => supplier.SupplierID, {
+    cascade: true,
+  })
+  @JoinColumn({ name: "SupplierID" })
+  SupplierID!: Supplier;
 
   @Column({ type: "varchar", length: 150 })
   InvoiceNo!: string;
