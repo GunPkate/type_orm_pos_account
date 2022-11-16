@@ -7,7 +7,7 @@ export class Supplier {
   SupplierID!: number;
 
   @OneToMany(() => Purchase, (purchase: Purchase) => purchase.SupplierID, {
-    cascade: true,
+    onUpdate: "CASCADE",
   })
   purchase!: Array<Purchase>;
 
