@@ -17,7 +17,7 @@ import { Category } from "./Model/Category";
 import { Expense } from './Model/Expense';
 import { ExpCategory } from './Model/ExpCategory';
 import { ExpenseDetail } from './Model/ExpenseDetail';
-import { Sale } from './Model/sale';
+import { Sale } from './Model/Sale';
 
 const tables = [AccountControl,AccountHead,Category,Customer,ExpCategory,Expense,ExpenseDetail,FinancialYear,Product,Purchase,PurchaseDetail,PurchaseReturn,PurchaseReturnDetail,Sale,SaleDetail,SaleReturn,SaleReturnDetail,Supplier,Transaction]
 

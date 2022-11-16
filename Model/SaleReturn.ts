@@ -5,7 +5,10 @@ import {
   BaseEntity,
   OneToMany,
   CreateDateColumn,
+  OneToOne,
+  JoinColumn,
 } from "typeorm";
+import { SaleReturnDetail } from "./SaleReturnDetail";
 
 @Entity({ name: "SaleReturn" })
 export class SaleReturn {
@@ -14,6 +17,10 @@ export class SaleReturn {
 
   @Column({ type: "int" })
   SaleID!: number;
+
+  @OneToOne(() => SaleReturnDetail)
+  @JoinColumn({ name: "SaleReturnDetailID" })
+  SaleReturnDetailID!: SaleReturnDetail;
 
   @Column({ type: "int" })
   CustomerID!: number;

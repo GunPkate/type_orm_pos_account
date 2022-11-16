@@ -6,16 +6,21 @@ import {
   OneToMany,
   OneToOne,
   JoinColumn,
+  ManyToOne,
 } from "typeorm";
 import { Product } from "./Product";
+import { Sale } from "./Sale";
 
 @Entity({ name: "SaleDetail" })
 export class SaleDetail {
   @PrimaryGeneratedColumn()
   SaleDetailID!: number;
 
-  @Column({ type: "int" })
-  SaleID!: number;
+  @ManyToOne(() => Sale, (Sale: Sale) => Sale.SaleID, {
+    cascade: true,
+  })
+  @JoinColumn({ name: "SaleID" })
+  Sale!: Sale;
 
   @OneToOne(() => Product)
   @JoinColumn({ name: "ProductID" })

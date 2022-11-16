@@ -25,7 +25,7 @@ export class PurchaseDetail {
   @JoinColumn({ name: "PurchaseID" })
   purchase!: Purchase;
 
-  @OneToOne(() => Product)
+  @OneToMany(() => Product, (product: Product) => product.ProductID)
   @JoinColumn({ name: "ProductID" })
   ProductID!: Product;
 

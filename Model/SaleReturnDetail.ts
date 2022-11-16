@@ -17,7 +17,7 @@ export class SaleReturnDetail {
   @Column({ type: "int" })
   SaleReturnID!: number;
 
-  @OneToOne(() => Product)
+  @OneToMany(() => Product, (product: Product) => product.ProductID)
   @JoinColumn({ name: "ProductID" })
   ProductID!: Product;
 
