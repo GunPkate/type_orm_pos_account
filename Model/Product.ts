@@ -11,6 +11,8 @@ import {
 } from "typeorm";
 import { SaleReturnDetail } from "./SaleReturnDetail";
 import { SaleDetail } from "./SaleDetail";
+import { PurchaseDetail } from "./PurchaseDetail";
+import { PurchaseReturnDetail } from "./PurchaseReturnDetail";
 
 @Entity({ name: "Product" })
 export class Product {
@@ -21,9 +23,20 @@ export class Product {
   @JoinColumn({ name: "CategoryID" })
   CategoryID!: Category;
 
-  @ManyToOne(() => Category, (category: Category) => category.CategoryID)
-  @JoinColumn({ name: "CategoryID" })
-  CategoryID!: Category;
+  @ManyToOne(
+    () => PurchaseDetail,
+    (PurchaseDetail: PurchaseDetail) => PurchaseDetail.PurchaseDetailID
+  )
+  @JoinColumn({ name: "PurchaseDetailID" })
+  PurchaseDetailID!: PurchaseDetail;
+
+  @ManyToOne(
+    () => PurchaseReturnDetail,
+    (PurchaseReturnDetail: PurchaseReturnDetail) =>
+      PurchaseReturnDetail.PurchaseReturnID
+  )
+  @JoinColumn({ name: "PurchaseReturnDetailID" })
+  PurchaseReturnDetailID!: PurchaseReturnDetail;
 
   @ManyToOne(() => SaleDetail, (saleDetail: SaleDetail) => saleDetail.ProductID)
   @JoinColumn({ name: "SaleDetailID" })
