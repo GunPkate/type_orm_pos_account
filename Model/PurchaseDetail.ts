@@ -4,7 +4,10 @@ import {
   Column,
   BaseEntity,
   OneToMany,
+  ManyToOne,
+  JoinColumn,
 } from "typeorm";
+import { Purchase } from "./Purchase";
 
 @Entity({ name: "PurchaseDetail" })
 export class PurchaseDetail {
@@ -13,6 +16,12 @@ export class PurchaseDetail {
 
   @Column({ type: "int" })
   PurchaseID!: number;
+
+  @ManyToOne(() => Purchase, (purchase: Purchase) => purchase.PurchaseID, {
+    cascade: true,
+  })
+  @JoinColumn({ name: "PurchaseID" })
+  purchase!: Purchase;
 
   @Column({ type: "int" })
   ProductID!: number;

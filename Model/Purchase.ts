@@ -1,20 +1,34 @@
+import { PurchaseReturn } from "./PurchaseReturn";
+import { PurchaseDetail } from "./PurchaseDetail";
 import { Supplier } from "./Supplier";
-import { AccountControl } from "./AccountControl";
 import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  BaseEntity,
-  OneToMany,
   CreateDateColumn,
   ManyToOne,
   JoinColumn,
+  OneToMany,
 } from "typeorm";
 
 @Entity({ name: "Purchase" })
 export class Purchase {
   @PrimaryGeneratedColumn()
   PurchaseID!: number;
+
+  @OneToMany(
+    () => PurchaseDetail,
+    (purchaseDetail: PurchaseDetail) => purchaseDetail.PurchaseDetailID,
+    { cascade: true }
+  )
+  purchaseDetail!: Array<PurchaseDetail>;
+
+  @OneToMany(
+    () => PurchaseReturn,
+    (purchaseReturn: PurchaseReturn) => purchaseReturn.PurchaseReturnID,
+    { cascade: true }
+  )
+  purchaseReturn!: Array<PurchaseReturn>;
 
   @ManyToOne(() => Supplier, (supplier: Supplier) => supplier.SupplierID, {
     cascade: true,

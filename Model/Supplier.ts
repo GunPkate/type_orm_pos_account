@@ -1,3 +1,5 @@
+import { PurchaseReturn } from "./PurchaseReturn";
+
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 import { Purchase } from "./Purchase";
 
@@ -10,6 +12,15 @@ export class Supplier {
     onUpdate: "CASCADE",
   })
   purchase!: Array<Purchase>;
+
+  @OneToMany(
+    () => PurchaseReturn,
+    (purchaseReturn: PurchaseReturn) => purchaseReturn.SupplierID,
+    {
+      onUpdate: "CASCADE",
+    }
+  )
+  purchaseReturn!: Array<PurchaseReturn>;
 
   @Column({ type: "varchar", length: 150 })
   SupplierName!: string;
