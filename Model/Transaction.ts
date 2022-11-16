@@ -38,9 +38,20 @@ export class Transaction {
   @JoinColumn({ name: "HeadControlID" })
   accountControl!: AccountControl;
 
-  @OneToOne(() => FinancialYear)
-  @JoinColumn({ name: "FinancialYearID" })
-  FinancialYearID!: FinancialYear;
+  // @OneToOne(() => FinancialYear)
+  // @JoinColumn({ name: "FinancialYearID" })
+  // FinancialYearID!: FinancialYear;
+
+  @Column({ type: "int" })
+  FinancialYearID!: number;
+
+  @ManyToOne(
+    () => FinancialYear,
+    (financialYear: FinancialYear) => financialYear.FinancialYearID,
+    { cascade: true }
+  )
+  @JoinColumn({ name: "HeadControlID" })
+  financialYear!: FinancialYear;
 
   @Column({ type: "varchar", length: 300 })
   TransactionTitle!: string;
