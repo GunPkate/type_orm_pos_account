@@ -4,6 +4,7 @@ import {
   Column,
   BaseEntity,
   OneToMany,
+  CreateDateColumn,
 } from "typeorm";
 
 @Entity({ name: "Product" })
@@ -18,7 +19,11 @@ export class Product {
   @Column({ type: "varchar", length: 150 })
   Name!: string;
 
-  @Column({ type: "date" })
+  @CreateDateColumn({
+    default: () => "CURRENT_TIMESTAMP",
+    type: "datetime",
+    name: "created_at",
+  })
   MffcDate!: Date;
 
   @Column({ type: "date" })

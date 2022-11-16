@@ -13,20 +13,13 @@ export class AccountHead {
   @OneToMany(
     () => AccountControl,
     (accountControl: AccountControl) => accountControl.HeadControlID,
-    {
-      onDelete: "CASCADE",
-      onUpdate: "CASCADE",
-    }
+    { cascade: true }
   )
   accountControl!: Array<AccountControl>;
-  // @OneToMany(
-  //   () => Transaction,
-  //   (transaction: Transaction) => transaction.HeadID,
-  //   {
-  //     onDelete: "CASCADE",
-  //     onUpdate: "CASCADE",
-  //   }
-  // )
-  // transaction!: Array<Transaction>;
-
+  @OneToMany(
+    () => Transaction,
+    (transaction: Transaction) => transaction.HeadID,
+    { cascade: true }
+  )
+  transaction!: Array<Transaction>;
 }

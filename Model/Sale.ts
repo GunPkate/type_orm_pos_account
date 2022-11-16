@@ -5,6 +5,7 @@ import {
   Column,
   BaseEntity,
   OneToMany,
+  CreateDateColumn,
 } from "typeorm";
 
 @Entity({ name: "Sale" })
@@ -21,7 +22,11 @@ export class Sale {
   @Column({ type: "varchar", length: 150 })
   InvoiceNo!: string;
 
-  @Column({ type: "date" })
+  @CreateDateColumn({
+    default: () => "CURRENT_TIMESTAMP",
+    type: "datetime",
+    name: "created_at",
+  })
   SaleDate!: Date;
 
   @Column({ type: "float" })

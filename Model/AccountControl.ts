@@ -4,8 +4,10 @@ import {
   Column,
   ManyToOne,
   JoinColumn,
+  OneToMany,
 } from "typeorm";
 import { AccountHead } from "./AccountHead";
+import { Transaction } from "./Transaction";
 
 @Entity({ name: "AccountControl" })
 export class AccountControl {
@@ -19,6 +21,12 @@ export class AccountControl {
   @JoinColumn({ name: "HeadID" })
   accountHead!: AccountHead;
 
+  @OneToMany(
+    () => Transaction,
+    (transaction: Transaction) => transaction.HeadControlID,
+    { cascade: true }
+  )
+  transaction!: Array<Transaction>;
   @Column()
   ControlTitle!: string;
 }

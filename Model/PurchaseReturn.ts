@@ -4,6 +4,7 @@ import {
   Column,
   BaseEntity,
   OneToMany,
+  CreateDateColumn,
 } from "typeorm";
 
 @Entity({ name: "PurchaseReturn" })
@@ -17,7 +18,11 @@ export class PurchaseReturn {
   @Column({ type: "int" })
   SupplierID!: number;
 
-  @Column({})
+  @CreateDateColumn({
+    default: () => "CURRENT_TIMESTAMP",
+    type: "datetime",
+    name: "created_at",
+  })
   PurchaseReturnDate!: Date;
 
   @Column({ type: "float" })
