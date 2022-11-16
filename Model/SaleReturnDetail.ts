@@ -4,7 +4,10 @@ import {
   Column,
   BaseEntity,
   OneToMany,
+  OneToOne,
+  JoinColumn,
 } from "typeorm";
+import { Product } from "./Product";
 
 @Entity({ name: "SaleReturnDetail" })
 export class SaleReturnDetail {
@@ -14,8 +17,9 @@ export class SaleReturnDetail {
   @Column({ type: "int" })
   SaleReturnID!: number;
 
-  @Column({ type: "int" })
-  ProductID!: number;
+  @OneToOne(() => Product)
+  @JoinColumn({ name: "ProductID" })
+  ProductID!: Product;
 
   @Column({ type: "int" })
   ReturnQty!: number;

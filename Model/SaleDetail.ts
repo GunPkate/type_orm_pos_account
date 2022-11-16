@@ -4,7 +4,10 @@ import {
   Column,
   BaseEntity,
   OneToMany,
+  OneToOne,
+  JoinColumn,
 } from "typeorm";
+import { Product } from "./Product";
 
 @Entity({ name: "SaleDetail" })
 export class SaleDetail {
@@ -14,8 +17,9 @@ export class SaleDetail {
   @Column({ type: "int" })
   SaleID!: number;
 
-  @Column({ type: "int" })
-  ProductID!: number;
+  @OneToOne(() => Product)
+  @JoinColumn({ name: "ProductID" })
+  ProductID!: Product;
 
   @Column({ type: "float" })
   SaleUnitPrice!: number;

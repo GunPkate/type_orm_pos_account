@@ -1,3 +1,4 @@
+import { Category } from "./Category";
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -5,6 +6,8 @@ import {
   BaseEntity,
   OneToMany,
   CreateDateColumn,
+  ManyToOne,
+  JoinColumn,
 } from "typeorm";
 
 @Entity({ name: "Product" })
@@ -12,9 +15,9 @@ export class Product {
   @PrimaryGeneratedColumn()
   ProductID!: number;
 
-  //
-  @Column({ type: "int" })
-  CategoryID!: number;
+  @ManyToOne(() => Category, (category: Category) => category.CategoryID)
+  @JoinColumn({ name: "CategoryID" })
+  CategoryID!: Category;
 
   @Column({ type: "varchar", length: 150 })
   Name!: string;
