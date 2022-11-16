@@ -50,7 +50,7 @@ export class Transaction {
     (financialYear: FinancialYear) => financialYear.FinancialYearID,
     { cascade: true }
   )
-  @JoinColumn({ name: "HeadControlID" })
+  @JoinColumn({ name: "FinancialYearID" })
   financialYear!: FinancialYear;
 
   @Column({ type: "varchar", length: 300 })
