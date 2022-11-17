@@ -8,6 +8,7 @@ import {
   JoinColumn,
   OneToOne,
   ManyToMany,
+  JoinTable,
 } from "typeorm";
 import { Product } from "./Product";
 import { Purchase } from "./Purchase";
@@ -26,9 +27,9 @@ export class PurchaseDetail {
   @JoinColumn({ name: "PurchaseID" })
   purchase!: Purchase;
 
-  @OneToMany(() => Product, (product: Product) => product.ProductID)
-  @JoinColumn({ name: "ProductID" })
-  ProductID!: Product;
+  @ManyToMany(() => Product, (product: Product) => product.ProductID)
+  @JoinTable()
+  ProductID!: Product[];
 
   @Column({ type: "int" })
   PurchaseQty!: number;

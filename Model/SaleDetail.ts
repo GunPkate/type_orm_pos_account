@@ -8,6 +8,7 @@ import {
   JoinColumn,
   ManyToOne,
   ManyToMany,
+  JoinTable,
 } from "typeorm";
 import { Product } from "./Product";
 import { Sale } from "./Sale";
@@ -24,8 +25,8 @@ export class SaleDetail {
   Sale!: Sale;
 
   @ManyToMany(() => Product,(product:Product)=>product.ProductID)
-  @JoinColumn({ name: "ProductID" })
-  ProductID!: Product;
+  @JoinTable()
+  ProductID!: Product[];
 
   @Column({ type: "float" })
   SaleUnitPrice!: number;

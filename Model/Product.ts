@@ -24,6 +24,23 @@ export class Product {
   @JoinColumn({ name: "CategoryID" })
   CategoryID!: Category;
 
+  @ManyToMany(
+    () => PurchaseDetail,
+    (PurchaseDetail: PurchaseDetail) => PurchaseDetail.PurchaseDetailID
+  )
+  @ManyToMany(
+    () => PurchaseReturnDetail,
+    (PurchaseReturnDetail: PurchaseReturnDetail) =>
+      PurchaseReturnDetail.PurchaseReturnID
+  )
+  @ManyToMany(
+    () => SaleDetail,
+    (saleDetail: SaleDetail) => saleDetail.ProductID
+  )
+  @ManyToMany(
+    () => SaleReturnDetail,
+    (saleReturnDetail: SaleReturnDetail) => saleReturnDetail.ProductID
+  )
   @Column({ type: "varchar", length: 150 })
   Name!: string;
 
