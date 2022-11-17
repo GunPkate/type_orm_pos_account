@@ -1,12 +1,14 @@
+import { Customer } from "./Customer";
 import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
   BaseEntity,
-  OneToMany,
+  ManyToOne,
   CreateDateColumn,
   OneToOne,
   JoinColumn,
+  OneToMany,
 } from "typeorm";
 import { SaleReturnDetail } from "./SaleReturnDetail";
 
@@ -18,12 +20,16 @@ export class SaleReturn {
   @Column({ type: "int" })
   SaleID!: number;
 
-  @OneToOne(() => SaleReturnDetail)
+  @OneToMany(
+    () => SaleReturnDetail,
+    (SaleReturnDetail: SaleReturnDetail) => SaleReturnDetail.SaleReturnID
+  )
   @JoinColumn({ name: "SaleReturnDetailID" })
-  SaleReturnDetailID!: SaleReturnDetail;
+  SaleReturnDetailID!: Array<SaleReturnDetail>;;
 
-  @Column({ type: "int" })
-  CustomerID!: number;
+  @ManyToOne(() => Customer, (customer: Customer) => customer.CustomerID)
+  @JoinColumn({ name: "CustomerID" })
+  CustomerID!: Customer;
 
   @CreateDateColumn({
     default: () => "CURRENT_TIMESTAMP",

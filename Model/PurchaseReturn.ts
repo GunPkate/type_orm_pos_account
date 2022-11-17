@@ -7,7 +7,7 @@ import {
   CreateDateColumn,
   ManyToOne,
   JoinColumn,
-  OneToOne,
+  OneToMany,
 } from "typeorm";
 import { PurchaseReturnDetail } from "./PurchaseReturnDetail";
 
@@ -19,9 +19,13 @@ export class PurchaseReturn {
   @Column({ type: "int" })
   PurchaseID!: number;
 
-  @OneToOne(() => PurchaseReturnDetail)
+  @OneToMany(
+    () => PurchaseReturnDetail,
+    (purchaseReturnDetail: PurchaseReturnDetail) =>
+      purchaseReturnDetail.PurchaseReturnID
+  )
   @JoinColumn({ name: "PurchaseReturnDetailID" })
-  PurchaseReturnDetailID!: PurchaseReturnDetail;
+  PurchaseReturnDetailID!: Array<PurchaseReturnDetail>;
 
   @ManyToOne(() => Purchase, (purchase: Purchase) => purchase.PurchaseID, {
     cascade: true,

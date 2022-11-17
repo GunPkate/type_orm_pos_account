@@ -3,7 +3,7 @@ import {
   PrimaryGeneratedColumn,
   Column,
   BaseEntity,
-  OneToMany,
+  ManyToMany,
   OneToOne,
   JoinColumn,
 } from "typeorm";
@@ -17,7 +17,7 @@ export class SaleReturnDetail {
   @Column({ type: "int" })
   SaleReturnID!: number;
 
-  @OneToMany(() => Product, (product: Product) => product.ProductID)
+  @ManyToMany(() => Product, (product: Product) => product.ProductID)
   @JoinColumn({ name: "ProductID" })
   ProductID!: Product;
 

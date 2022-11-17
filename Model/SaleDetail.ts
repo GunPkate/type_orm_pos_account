@@ -7,6 +7,7 @@ import {
   OneToOne,
   JoinColumn,
   ManyToOne,
+  ManyToMany,
 } from "typeorm";
 import { Product } from "./Product";
 import { Sale } from "./Sale";
@@ -22,7 +23,7 @@ export class SaleDetail {
   @JoinColumn({ name: "SaleID" })
   Sale!: Sale;
 
-  @OneToOne(() => Product)
+  @ManyToMany(() => Product,(product:Product)=>product.ProductID)
   @JoinColumn({ name: "ProductID" })
   ProductID!: Product;
 

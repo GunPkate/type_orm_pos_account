@@ -7,6 +7,7 @@ import {
   ManyToOne,
   JoinColumn,
   OneToOne,
+  ManyToMany,
 } from "typeorm";
 import { Product } from "./Product";
 import { Purchase } from "./Purchase";
@@ -19,7 +20,7 @@ export class PurchaseDetail {
   @Column({ type: "int" })
   PurchaseID!: number;
 
-  @ManyToOne(() => Purchase, (purchase: Purchase) => purchase.PurchaseID, {
+  @ManyToMany(() => Purchase, (purchase: Purchase) => purchase.PurchaseID, {
     cascade: true,
   })
   @JoinColumn({ name: "PurchaseID" })

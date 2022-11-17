@@ -6,6 +6,7 @@ import {
   OneToMany,
   OneToOne,
   JoinColumn,
+  ManyToMany,
 } from "typeorm";
 import { Product } from "./Product";
 
@@ -17,7 +18,7 @@ export class PurchaseReturnDetail {
   @Column({ type: "int" })
   PurchaseReturnID!: number;
 
-  @OneToMany(() => Product, (product: Product) => product.ProductID)
+  @ManyToMany(() => Product, (product: Product) => product.ProductID)
   @JoinColumn({ name: "ProductID" })
   ProductID!: Product;
 
